@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const { Trip, Participant } = require('../models');
-
 router.get('/', async (req, res) => {
   try {
     const trips = await Trip.findAll({

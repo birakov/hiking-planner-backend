@@ -6,7 +6,6 @@ router.post('/:tripId/participants', async (req, res) => {
   try {
     const { user_id, status = 'pending', role = 'participant' } = req.body;
     const tripId = req.params.tripId;
-
     const trip = await Trip.findByPk(tripId);
     if (!trip) return res.status(404).json({ error: 'Поход не найден' });
 

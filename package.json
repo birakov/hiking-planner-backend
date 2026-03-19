@@ -1,7 +1,7 @@
 {
   "name": "hiking-planner",
   "version": "1.0.0",
-  "description": "Серверная часть приложения для планирования походов (Express + Sequelize + MySQL/PostgreSQL)",
+  "description": "Серверная часть приложения для планирования походов",
   "main": "app.js",
   "type": "module",                   
   "scripts": {

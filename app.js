@@ -16,11 +16,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api', participantsRouter);
+app.use('/public', express.static(__dirname + '/public'));
 
 app.use('/api/trips', tripsRouter);
-
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/api', participantsRouter);
 
 app.get('/', (req, res) => {
   res.send('Добро пожаловать в Hiking Planner API');
@@ -28,7 +27,7 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-sequelize.sync({ alter: true }) 
+sequelize.sync({ alter: true })
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Сервер запущен на порту ${PORT}`);

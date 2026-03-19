@@ -25,26 +25,11 @@ router.post('/:tripId/participants', async (req, res) => {
 
 router.get('/:tripId/participants', async (req, res) => {
   try {
-    const tripId = req.params.tripId;
-
     const participants = await Participant.findAll({
-      where: { trip_id: tripId },
+      where: { trip_id: req.params.tripId },
       include: [{ model: Trip, attributes: ['title'] }],
     });
-
     res.json(participants);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-router.get('/trips/:id', async (req, res) => {
-  try {
-    const trip = await Trip.findByPk(req.params.id, {
-      include: [{ model: Participant }],
-    });
-    if (!trip) return res.status(404).json({ error: 'Поход не найден' });
-    res.json(trip);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

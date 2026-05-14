@@ -2,11 +2,10 @@ const express = require('express');
 const dotenv = require('dotenv');
 const sequelize = require('./config/db');
 
-// Импорт роутеров
 const tripsRouter = require('./routes/trips');
 const participantsRouter = require('./routes/participants');
 const usersRouter = require('./routes/users');
-const userrolesRouter = require('./routes/userroles');     // ← НОВОЕ
+const userrolesRouter = require('./routes/userroles');     
 
 dotenv.config();
 
@@ -22,11 +21,10 @@ app.use((req, res, next) => {
 
 app.use('/public', express.static(__dirname + '/public'));
 
-// Маршруты
 app.use('/api/trips', tripsRouter);
 app.use('/api', participantsRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/userroles', userrolesRouter);     // ← НОВОЕ
+app.use('/api/userroles', userrolesRouter);   
 
 app.get('/', (req, res) => {
   res.send('Добро пожаловать в Hiking Planner API');

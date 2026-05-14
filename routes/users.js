@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { User, UserRole } = require('../models');
 
-// GET /api/users — список всех пользователей
 router.get('/', async (req, res) => {
   try {
     const users = await User.findAll({
@@ -14,7 +13,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/users/:id — один пользователь
 router.get('/:id', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id, {
@@ -27,7 +25,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST /api/users — регистрация пользователя
 router.post('/', async (req, res) => {
   try {
     const user = await User.create(req.body);
@@ -37,7 +34,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT /api/users/:id — обновление пользователя
 router.put('/:id', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);

@@ -5,6 +5,8 @@ const cors = require('cors');
 dotenv.config();
 
 const sequelize = require('./config/db');
+
+// Импорт роутов
 const tripsRouter = require('./routes/trips');
 const participantsRouter = require('./routes/participants');
 const usersRouter = require('./routes/users');
@@ -14,27 +16,27 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000', // ← Измени на адрес твоего фронтенда
+  origin: 'http://localhost:3000',   // адрес твоего фронтенда (Nuxt)
   credentials: true
 }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Логирование запросов
+// Логирование
 app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  console.log(`${req.method} ${req.path}`);
   next();
 });
 
-// Маршруты
+// Роуты
 app.use('/api/trips', tripsRouter);
 app.use('/api/participants', participantsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/userroles', userRolesRouter);
 
 app.get('/', (req, res) => {
-  res.send('Hiking Planner API is running');
+  res.send('Hiking Planner API работает ✅');
 });
 
 const PORT = process.env.PORT || 5000;
@@ -42,7 +44,7 @@ const PORT = process.env.PORT || 5000;
 sequelize.sync({ alter: true })
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Сервер запущен на порту ${PORT}`);
+      console.log(`🚀 Сервер запущен на порту ${PORT}`);
     });
   })
   .catch(err => {
